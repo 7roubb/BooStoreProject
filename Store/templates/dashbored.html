@@ -1,0 +1,96 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class='content'>
+
+<div class="header">
+    <p> In order : <span class="badge text-bg-primary">{{in_order}}</span></p>
+    <p> Derliverd : <span class="badge text-bg-success">{{delivered}}</span></p>
+    <p> Cancelled : <span class="badge text-bg-danger"> {{cancelled}}</span> </p>
+    <p> Returned : <span class="badge text-bg-warning">{{returned}}</span> </p>
+    <p> Pending : <span class="badge text-bg-info">{{pending}}</span></p>
+    <p> Delivering : <span class="badge text-bg-light">{{delivering}}</span></p>
+ 
+
+
+   
+</div>
+<h1>Orders</h1>
+
+<table class="table table-sm table-light">
+    <thead>
+      <tr>
+        <th scope="col">Person</th>
+        <th scope="col">Order Status</th>
+        <th scope="col"> Price </th>
+        <th scope="col">Book name</th>
+        <th scope="col">Book Tags</th>
+        <th scope = "col">
+            Action
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+    
+{% for  oe in order %} <tr>
+        <td>{{oe.person.name}}</td>
+        <td>{{oe.status}}</td>
+        <td>{{oe.book.price}}</td>
+        <td>{{oe.book.name}}</td>
+        <td>
+        {% for t in oe.book.tag.all %}
+        <li>{{t.name}}</li>
+        {% endfor %}
+        </td>
+        <td>
+            <a href = '#'><i class="fa-solid fa-pen"></i></a>
+            <a href='#'><i class="fa-solid fa-trash"></i></a>
+
+        </td>
+
+      </tr>
+    {% endfor %}
+     
+
+  
+    </tbody>
+  </table>
+
+
+  <br>
+  <h1>Person</h1>
+  <table class="table table-sm table-light">
+    <thead>
+      <tr>
+        <th scope="col"> Name </th>
+        <th scope="col">Email</th>
+        <th scope="col"> Phone </th>
+        <th scope = "col">
+            Action
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+{% for  person in persons %} <tr>
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.phone}}</td>
+        <td>
+            <a href = '#'><i class="fa-solid fa-pen"></i></a>
+            <a href='#'><i class="fa-solid fa-trash"></i></a>
+
+        </td>
+
+      </tr>
+    {% endfor %}
+     
+
+  
+    </tbody>
+  </table>
+</div>
+{% endblock  %}

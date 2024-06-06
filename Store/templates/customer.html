@@ -1,0 +1,49 @@
+
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class='content'>
+
+<h1>Persons</h1>
+
+{% if persons %} 
+        <p> {{persons.name}}</p>
+        <p> {{persons.email}}</p>
+    {%else%}
+    <p> there is no person yet  </p>
+    
+
+ 
+
+{%endif%}
+
+<h1>Orders</h1>
+{% if orders %}
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Book</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %} 
+
+          <tr>
+            <td>{{order.status}}</td>
+            <td>{{order.book.name}}</td>
+            <td>{{order.book.price}}</td>
+          </tr>
+          {% endfor %}
+
+    
+        </tbody>
+      </table>
+      {% else %}
+      <p> there is no orders  </p>
+      {% endif %}
+
+    </div>
+{% endblock  %}
