@@ -4,11 +4,6 @@
 {% block content %}
 
 <div class='content'>
-    <form action=""  method="POST">
-        {%csrf_token%}
-        {{form.as_p}}
-        <input type="submit" class="btn btn-primary" value="Submit">
-    </form>
 
 <h1>Books</h1>
 {% if books %}
@@ -48,8 +43,15 @@
             {% endfor %}
             </td>
             <td>
+              <div calss="Action" >
+                <form action="{% url "deletebook" book.id %}" method="POST">
+                  {%csrf_token%}
+                  <button type="submit" onclick="return confirm('Are you Sure u wanna delete a this book ??')"> </button>
+                </form>
                 <a href = '#'><i class="fa-solid fa-pen"></i></a>
                 <a href='#'><i class="fa-solid fa-trash"></i></a>
+              </div>
+           
 
             </td>
 

@@ -2,7 +2,7 @@
 # Create your views here.
 
 
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -48,7 +48,7 @@ def book(request):
             return redirect('/books')
     
     books= Book.objects.all()
-    context = {'books':books,'form':form}
+    context = {'books':books}
 
     return render(request,'book.html',context)
 
@@ -62,3 +62,31 @@ def create(request):
     context = {'form':form}
     return render(request,'OrderForm.html',context)
 
+def update(request,pk): 
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance= order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form':form}
+    return render(request,'OrderForm.html',context)
+
+def delete_order(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    if request.method == 'POST':
+        order.delete()
+        return redirect('/')
+    context = {'item': order}
+    return render(request, 'dashbored.html', context)
+
+
+
+def delete_book(request,pk):
+    book = Book.objects.get(id=pk)
+    if request.method == 'POST' :
+        book.delete()
+        return redirect('/books')
+    context = {'book':book}
+    return render(request,'book.html',context)

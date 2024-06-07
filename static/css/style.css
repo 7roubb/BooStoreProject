@@ -32,7 +32,6 @@ border-radius: 10px;
     align-items: center;
 }
 .table{
-    background-color:rgb(184, 181, 181) ;
     width: 70%;
 }
 .fa-trash{
@@ -55,4 +54,16 @@ border-radius: 10px;
     padding: 10px 20px;
     position: relative;
     left: -32%;
+}
+.delete {
+    border: none;
+    background-color: transparent;
+    display: flex;
+
+}
+
+.Action {
+    display: flex;
+    justify-content: space-around;
+
 }
