@@ -1,0 +1,69 @@
+
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class='content'>
+    <form action=""  method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+<h1>Books</h1>
+{% if books %}
+
+    <table class="table table-hover">
+
+        <thead>
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">author</th>
+            <th scope="col">Price</th>
+            <th scope="col">issuData</th>
+            <th scope="col">category</th>
+            <th scope="col">
+                Tag
+            </th>
+            <th scope="col">
+                Action
+            </th>
+
+
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for book in books %} 
+
+          <tr>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.issuDate}}</td>
+            <td>{{book.category}}</td>
+            <td>
+            {% for t in book.tag.all %}
+            <li>{{t.name}}</li>
+            {% endfor %}
+            </td>
+            <td>
+                <a href = '#'><i class="fa-solid fa-pen"></i></a>
+                <a href='#'><i class="fa-solid fa-trash"></i></a>
+
+            </td>
+
+
+
+          </tr>
+          {% endfor %}
+
+    
+        </tbody>
+      </table>
+      {% else %}
+      <p> there is no orders  </p>
+      {% endif %}
+
+    </div>
+{% endblock  %}

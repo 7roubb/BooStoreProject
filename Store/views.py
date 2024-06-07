@@ -1,11 +1,11 @@
-from django.shortcuts import render
 
 # Create your views here.
 
 
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 
 # Create your views here.
  
@@ -39,9 +39,26 @@ def customer(request,pk):
     orders = person.order_set.all()
     return render(request,'customer.html' ,{'persons':person,'orders':orders})
 
-def contact(request):
-    return HttpResponse('this is contact page ')
+def book(request):
+    form = BookForm()
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/books')
+    
+    books= Book.objects.all()
+    context = {'books':books,'form':form}
 
+    return render(request,'book.html',context)
 
-
+def create(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form':form}
+    return render(request,'OrderForm.html',context)
 
